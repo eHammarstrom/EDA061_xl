@@ -2,8 +2,11 @@ package model;
 
 import java.util.HashMap;
 
+
+import util.XLException;
+
 public class Sheet implements expr.Environment{
-	private HashMap<Address, Slot> sheet;
+	HashMap<Address, Slot> sheet;
 	
 	public Sheet(Address adress, Slot slot) {
 		sheet = new HashMap<Address, Slot>();
@@ -27,7 +30,13 @@ public class Sheet implements expr.Environment{
 	
 	@Override
 	public double value(String name) {
-		return sheet.get(new Address(name)).getValue();
+		Slot slot = sheet.get(new Address(name));
+		
+		if(slot == null) {
+			throw new XLException("Empty slot");
+		}
+
+		return slot.getValue(this);	
 	}
 
 }
