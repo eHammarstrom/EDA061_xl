@@ -2,16 +2,18 @@ package model;
 
 import java.util.HashMap;
 
-
+import gui.CurrentSlot;
 import util.XLException;
 
 public class Sheet implements expr.Environment{
-	HashMap<Address, Slot> sheet;
-	SlotCreator slotCreator;
+	private HashMap<Address, Slot> sheet;
+	private SlotCreator slotCreator;
+	private CurrentSlot cs;
 	
-	public Sheet() {
+	public Sheet(CurrentSlot cs) {
 		sheet = new HashMap<Address, Slot>();
 		slotCreator = new SlotCreator();
+		this.cs = cs;
 	}
 	
 	public HashMap<Address, Slot> getSheet() {
@@ -19,7 +21,7 @@ public class Sheet implements expr.Environment{
 	}
 	
 	public void updateSheet(Sheet s) {
-		sheet = s.sheet;
+		cs.notifyObservers();
 	}
 	
 	public Slot getSlot(Address address) {

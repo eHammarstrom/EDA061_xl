@@ -17,14 +17,15 @@ public class Editor extends JTextField implements Observer, ActionListener {
 	CurrentSlot cs;
 	
 	
-//    public Editor(Sheet sheet, StatusLabel sl, CurrentSlot cs) {
-//        setBackground(Color.WHITE);
-//        this.sheet = sheet;
-//        this.sl = sl;
-//        this.cs = cs;
-//        addActionListener(this);
-//        
-//    }
+    public Editor(CurrentSlot cs, StatusLabel sl, Sheet sheet) {
+        setBackground(Color.WHITE);
+        this.sheet = sheet;
+        this.sl = sl;
+        this.cs = cs;
+        addActionListener(this);
+        cs.addObserver(this);
+        
+    }
     
     public Editor() {
         setBackground(Color.WHITE);
@@ -33,12 +34,15 @@ public class Editor extends JTextField implements Observer, ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("Click!");
+	
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		
+	
+		String name = cs.getName();
+
 	}
 }
