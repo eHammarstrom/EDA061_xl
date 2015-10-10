@@ -26,10 +26,7 @@ public class Editor extends JTextField implements Observer, ActionListener {
         cs.addObserver(this);
         
     }
-    
-    public Editor() {
-        setBackground(Color.WHITE);
-    }
+
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
