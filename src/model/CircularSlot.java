@@ -8,14 +8,12 @@ public class CircularSlot implements Slot {
 	// This slot handles errors
 	
 	public String toString() {	
-		throw new XLException("ERROR BIATCH (CIRCULAR)");
+		throw new XLException("CIRCULAR ERROR");
 	}
 
 	@Override
 	public double getValue(Environment e) {
-		throw new XLException("ERROR BIATCH (CIRCULAR)");
+		throw new XLException("CIRCULAR ERROR");
 	}
-	
-	
 	
 }

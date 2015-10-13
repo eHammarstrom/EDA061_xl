@@ -5,14 +5,14 @@ import java.util.HashMap;
 import gui.CurrentSlot;
 import util.XLException;
 
-public class Sheet implements expr.Environment{
+public class Sheet implements expr.Environment {
 	private HashMap<Address, Slot> sheet;
 	private SlotCreator slotCreator;
 	private CurrentSlot cs;
 	
 	public Sheet(CurrentSlot cs) {
 		sheet = new HashMap<Address, Slot>();
-		slotCreator = new SlotCreator();
+		slotCreator = new SlotCreator();		
 		this.cs = cs;
 	}
 	
@@ -35,12 +35,16 @@ public class Sheet implements expr.Environment{
 		updateSheet(this);
 	}
 	
+	public void removeSlot(Address address) {
+		sheet.remove(address);
+	}
+	
 	public void circularCheck(Address address, Slot slot) {
 		Slot currentSlot = sheet.get(address);
 		CircularSlot circularSlot = new CircularSlot();
 		sheet.put(address, circularSlot);
 		try {
-			slot.getValue(this); // "finally" always executes, even though this might return an exception
+			 slot.getValue(this); // "finally" always executes, even though this might return an exception
 		} finally {
 			sheet.put(address, currentSlot);
 		}
@@ -53,6 +57,7 @@ public class Sheet implements expr.Environment{
 	
 	@Override
 	public double value(String name) {
+		
 		Slot slot = sheet.get(new Address(name));
 		
 		if(slot == null) {
@@ -60,6 +65,13 @@ public class Sheet implements expr.Environment{
 		}
 
 		return slot.getValue(this);	
+	}
+	
+	public String getSlotString(Address address) {
+		if (getSlot(address) == null) {
+			return "";
+		}
+		return getSlot(address).toString();
 	}
 
 }

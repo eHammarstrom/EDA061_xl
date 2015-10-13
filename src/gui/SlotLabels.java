@@ -6,6 +6,9 @@ import java.util.List;
 
 import javax.swing.SwingConstants;
 
+import model.Address;
+import model.Column;
+import model.Row;
 import model.Sheet;
 
 public class SlotLabels extends GridPanel {
@@ -27,7 +30,11 @@ public class SlotLabels extends GridPanel {
         }
         for (int row = 1; row <= rows; row++) {
             for (char ch = 'A'; ch < 'A' + cols; ch++) {
-                SlotLabel label = new SlotLabel(cs, sl, sheet);
+                
+            	Address addr = new Address(new Column(ch), new Row(row));
+            	
+                SlotLabel label = new SlotLabel(addr, cs, sl, sheet);
+               // cs.addObserver(label);
                 add(label);
                 labelList.add(label);
             }
