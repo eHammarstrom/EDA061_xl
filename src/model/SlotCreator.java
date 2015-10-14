@@ -10,12 +10,13 @@ public class SlotCreator {
 		ExprParser parser = new ExprParser();
 		
 		if(input.charAt(0) == '#') {
+			System.out.println("Comment");
 			return new CommentSlot(input.substring(1));
 		} else {
 			try {
 				System.out.println("Expression built by SlotCreator for Editor: " + input);
 				return new ExpressionSlot(parser.build(input));
-			} catch (Exception error) {
+			} catch (Exception e) {
 				throw new XLException("SlotCreator failure");
 			}
 		}

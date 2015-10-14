@@ -33,7 +33,7 @@ public class Sheet implements expr.Environment {
 		Slot slot = slotCreator.createSlot(input);
 		System.out.println("sheet.setSlot: Successfully built the slot.\n" + 
 				"Checking circularCheck");
-//		circularCheck(address, slot);
+		circularCheck(address, slot);
 		System.out.println("Passed circularCheck\n" + 
 				"sheet.setSlot(" + address + ", " + input + ")");
 		sheet.put(address, slot);
@@ -46,20 +46,16 @@ public class Sheet implements expr.Environment {
 	}
 	
 	public void circularCheck(Address address, Slot slot) {
-		CircularSlot circularSlot = new CircularSlot();
-		sheet.put(address, circularSlot);
+		
+		Slot oldSlot = sheet.get(address);
+		CircularSlot errorSlot = new CircularSlot();
+		sheet.put(address, errorSlot);
 		try {
+			slot.getValue(this);
 		} finally {
-			sheet.put(address, slot);
+			sheet.put(address, oldSlot);
 		}
-//		Slot currentSlot = sheet.get(address);
-//		CircularSlot circularSlot = new CircularSlot();
-//		sheet.put(address, circularSlot);
-//		try {
-//			slot.getValue(this); 
-//		} finally {
-//			sheet.put(address, slot);
-//		}
+
 	}
 	
 	public void clearSheet() {
