@@ -29,9 +29,15 @@ public class Sheet implements expr.Environment {
 	}
 
 	public void setSlot(Address address, String input) {
+		System.out.println("sheet.setSlot: Trying to slotCreator.createSlot(" + input + ")");
 		Slot slot = slotCreator.createSlot(input);
+		System.out.println("sheet.setSlot: Successfully built the slot.\n" + 
+				"Checking circularCheck");
 		circularCheck(address, slot);
+		System.out.println("Passed circularCheck\n" + 
+				"sheet.setSlot(" + address + ", " + input + ")");
 		sheet.put(address, slot);
+		System.out.println("sheet.setSlot: Successfully sheet.put(" + address + ", " + input + ")");
 		updateSheet(this);
 	}
 	
@@ -40,13 +46,12 @@ public class Sheet implements expr.Environment {
 	}
 	
 	public void circularCheck(Address address, Slot slot) {
-		Slot currentSlot = sheet.get(address);
 		CircularSlot circularSlot = new CircularSlot();
 		sheet.put(address, circularSlot);
 		try {
-			 slot.getValue(this); // "finally" always executes, even though this might return an exception
+//			 currentSlot.getValue(this); // "finally" always executes, even though this might return an exception
 		} finally {
-			sheet.put(address, currentSlot);
+			sheet.put(address, slot);
 		}
 	}
 	

@@ -1,7 +1,5 @@
 package model;
 
-import java.beans.Expression;
-
 import expr.*;
 
 import expr.Environment;

@@ -47,7 +47,6 @@ public class Editor extends JTextField implements Observer, ActionListener {
 				sl.setText(error.getMessage());
 			}
 		}
-		setText("");
 	}
 
 	@Override
@@ -55,8 +54,6 @@ public class Editor extends JTextField implements Observer, ActionListener {
 		// TODO Auto-generated method stub
 		System.out.println("Editor tried to update: " + cs.getAddress().toString());
 
-//		String data = Double.toString(sheet.value(cs.getAddress().toString()));
-
-//		System.out.println(data);
+		setText(sheet.getSlotString(cs.getAddress()));
 	}
 }

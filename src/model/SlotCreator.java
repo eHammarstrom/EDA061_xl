@@ -10,7 +10,7 @@ public class SlotCreator {
 		ExprParser parser = new ExprParser();
 		
 		if(input.charAt(0) == '#') {
-			return new CommentSlot(input);
+			return new CommentSlot(input.substring(1));
 		} else {
 			try {
 				System.out.println("Expression built by SlotCreator for Editor: " + input);
