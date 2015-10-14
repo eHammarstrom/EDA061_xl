@@ -24,9 +24,9 @@ public class Sheet implements expr.Environment {
 		cs.notifyObservers();
 	}
 	
-	public Slot getSlot(Address address) {
-		return sheet.get(address);
-	}
+//	public Slot getSlot(Address address) {
+//		return sheet.get(address);
+//	}
 
 	public void setSlot(Address address, String input) {
 		System.out.println("sheet.setSlot: Trying to slotCreator.createSlot(" + input + ")");
@@ -46,10 +46,17 @@ public class Sheet implements expr.Environment {
 	}
 	
 	public void circularCheck(Address address, Slot slot) {
+//		CircularSlot circularSlot = new CircularSlot();
+//		sheet.put(address, circularSlot);
+//		try {
+//		} finally {
+//			sheet.put(address, slot);
+//		}
+		Slot currentSlot = sheet.get(address);
 		CircularSlot circularSlot = new CircularSlot();
 		sheet.put(address, circularSlot);
 		try {
-//			 currentSlot.getValue(this); // "finally" always executes, even though this might return an exception
+			slot.getValue(this); 
 		} finally {
 			sheet.put(address, slot);
 		}
@@ -65,18 +72,30 @@ public class Sheet implements expr.Environment {
 		
 		Slot slot = sheet.get(new Address(name));
 		
-		if(slot == null) {
+		if (slot == null) {
 			throw new XLException("Empty slot");
 		}
+		
+		System.out.println("sheet.value: slot was not null - " + slot.toString());
 
 		return slot.getValue(this);	
 	}
 	
-	public String getSlotString(Address address) {
-		if (getSlot(address) == null) {
+	public String getSlotValueToString(Address address) {
+		try {
+			return Double.toString(sheet.get(address).getValue(this));
+		} catch (Exception xle) {
+			System.out.println(xle);
+			return getSlotString(address);
+		}
+	}
+	
+	private String getSlotString(Address address) {
+		if (sheet.get(address) == null) {
 			return "";
 		}
-		return getSlot(address).toString();
+
+		return sheet.get(address).toString();
 	}
 
 }

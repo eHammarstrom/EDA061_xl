@@ -8,6 +8,7 @@ import java.util.Observer;
 
 import model.Address;
 import model.Sheet;
+import util.XLException;
 
 public class SlotLabel extends ColoredLabel implements MouseListener, Observer {
 	private Address addr;
@@ -27,12 +28,7 @@ public class SlotLabel extends ColoredLabel implements MouseListener, Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
-//		Address addr = cs.getAddress();
-//		String data = sheet.getSlotString(addr);
-		setText(sheet.getSlotString(addr));
-		
+		setText(sheet.getSlotValueToString(addr));
 	}
 	
 	public Address getAddress() {

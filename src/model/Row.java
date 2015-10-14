@@ -11,4 +11,7 @@ public class Row {
 		return Integer.toString(row);
 	}
 	
+//	public int getValue() {
+//		return row;
+//	}
 }

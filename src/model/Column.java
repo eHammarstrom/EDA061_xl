@@ -10,4 +10,8 @@ public class Column {
 	public String toString() {
 		return Character.toString(col);
 	}
+	
+//	public int getValue() {
+//		return col;
+//	}
 }

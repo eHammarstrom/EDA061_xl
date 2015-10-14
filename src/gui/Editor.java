@@ -54,6 +54,6 @@ public class Editor extends JTextField implements Observer, ActionListener {
 		// TODO Auto-generated method stub
 		System.out.println("Editor tried to update: " + cs.getAddress().toString());
 
-		setText(sheet.getSlotString(cs.getAddress()));
+		setText(sheet.getSlotValueToString(cs.getAddress()));
 	}
 }
