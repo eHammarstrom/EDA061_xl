@@ -11,7 +11,7 @@ public class Address {
 	
 	public Address(String addr) {
 		this.col = new Column(addr.charAt(0));
-		this.row = new Row(addr.charAt(1));
+		this.row = new Row(Integer.parseInt(Character.toString(addr.charAt(1))));
 	}
 	
 	public String toString() {

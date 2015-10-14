@@ -33,7 +33,7 @@ public class Sheet implements expr.Environment {
 		Slot slot = slotCreator.createSlot(input);
 		System.out.println("sheet.setSlot: Successfully built the slot.\n" + 
 				"Checking circularCheck");
-		circularCheck(address, slot);
+//		circularCheck(address, slot);
 		System.out.println("Passed circularCheck\n" + 
 				"sheet.setSlot(" + address + ", " + input + ")");
 		sheet.put(address, slot);
@@ -46,20 +46,20 @@ public class Sheet implements expr.Environment {
 	}
 	
 	public void circularCheck(Address address, Slot slot) {
-//		CircularSlot circularSlot = new CircularSlot();
-//		sheet.put(address, circularSlot);
-//		try {
-//		} finally {
-//			sheet.put(address, slot);
-//		}
-		Slot currentSlot = sheet.get(address);
 		CircularSlot circularSlot = new CircularSlot();
 		sheet.put(address, circularSlot);
 		try {
-			slot.getValue(this); 
 		} finally {
 			sheet.put(address, slot);
 		}
+//		Slot currentSlot = sheet.get(address);
+//		CircularSlot circularSlot = new CircularSlot();
+//		sheet.put(address, circularSlot);
+//		try {
+//			slot.getValue(this); 
+//		} finally {
+//			sheet.put(address, slot);
+//		}
 	}
 	
 	public void clearSheet() {
@@ -69,12 +69,10 @@ public class Sheet implements expr.Environment {
 	
 	@Override
 	public double value(String name) {
-		
 		Slot slot = sheet.get(new Address(name));
 		
-		if (slot == null) {
-			throw new XLException("Empty slot");
-		}
+		if (slot == null) 
+			throw new XLException("Null Slot");
 		
 		System.out.println("sheet.value: slot was not null - " + slot.toString());
 
@@ -85,7 +83,6 @@ public class Sheet implements expr.Environment {
 		try {
 			return Double.toString(sheet.get(address).getValue(this));
 		} catch (Exception xle) {
-			System.out.println(xle);
 			return getSlotString(address);
 		}
 	}
