@@ -11,7 +11,7 @@ public class SlotCreator {
 		
 		if(input.charAt(0) == '#') {
 			System.out.println("Comment");
-			return new CommentSlot(input.substring(1));
+			return new CommentSlot(input);
 		} else {
 			try {
 				System.out.println("Expression built by SlotCreator for Editor: " + input);

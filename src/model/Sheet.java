@@ -1,11 +1,12 @@
 package model;
 
 import java.util.HashMap;
+import java.util.Observable;
 
 import gui.CurrentSlot;
 import util.XLException;
 
-public class Sheet implements expr.Environment {
+public class Sheet extends Observable implements expr.Environment {
 	private HashMap<Address, Slot> sheet;
 	private SlotCreator slotCreator;
 	private CurrentSlot cs;
@@ -20,8 +21,10 @@ public class Sheet implements expr.Environment {
 		return sheet;
 	}
 	
-	public void updateSheet(Sheet s) {
-		cs.notifyObservers();
+	@Override
+	public void notifyObservers() {
+		setChanged();
+		super.notifyObservers();
 	}
 	
 //	public Slot getSlot(Address address) {
@@ -29,16 +32,16 @@ public class Sheet implements expr.Environment {
 //	}
 
 	public void setSlot(Address address, String input) {
-		System.out.println("sheet.setSlot: Trying to slotCreator.createSlot(" + input + ")");
+//		System.out.println("sheet.setSlot: Trying to slotCreator.createSlot(" + input + ")");
 		Slot slot = slotCreator.createSlot(input);
-		System.out.println("sheet.setSlot: Successfully built the slot.\n" + 
-				"Checking circularCheck");
+//		System.out.println("sheet.setSlot: Successfully built the slot.\n" + 
+//				"Checking circularCheck");
 		circularCheck(address, slot);
-		System.out.println("Passed circularCheck\n" + 
-				"sheet.setSlot(" + address + ", " + input + ")");
+//		System.out.println("Passed circularCheck\n" + 
+//				"sheet.setSlot(" + address + ", " + input + ")");
 		sheet.put(address, slot);
-		System.out.println("sheet.setSlot: Successfully sheet.put(" + address + ", " + input + ")");
-		updateSheet(this);
+//		System.out.println("sheet.setSlot: Successfully sheet.put(" + address + ", " + input + ")");
+		cs.notifyObservers();
 	}
 	
 	public void removeSlot(Address address) {
@@ -46,7 +49,6 @@ public class Sheet implements expr.Environment {
 	}
 	
 	public void circularCheck(Address address, Slot slot) {
-		
 		Slot oldSlot = sheet.get(address);
 		CircularSlot errorSlot = new CircularSlot();
 		sheet.put(address, errorSlot);
@@ -60,7 +62,7 @@ public class Sheet implements expr.Environment {
 	
 	public void clearSheet() {
 		sheet.clear();
-		updateSheet(this);
+		notifyObservers();
 	}
 	
 	@Override
@@ -77,13 +79,26 @@ public class Sheet implements expr.Environment {
 	
 	public String getSlotValueToString(Address address) {
 		try {
-			return Double.toString(sheet.get(address).getValue(this));
+			Slot slot = sheet.get(address);
+		
+			if (slot instanceof CommentSlot)
+				return getCommentToString(address);
+			else
+				return Double.toString(slot.getValue(this));
 		} catch (Exception xle) {
-			return getSlotString(address);
+			return getExpressionSlotTextToString(address);
 		}
 	}
 	
-	private String getSlotString(Address address) {
+	private String getCommentToString(Address address) {
+		String commentSlot = sheet.get(address).toString().substring(1);
+		if (commentSlot == null)
+			return "";
+		
+		return commentSlot;
+	}
+	
+	private String getExpressionSlotTextToString(Address address) {
 		if (sheet.get(address) == null) {
 			return "";
 		}
