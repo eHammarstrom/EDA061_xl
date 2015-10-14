@@ -54,7 +54,7 @@ public class Editor extends JTextField implements Observer, ActionListener {
 		// TODO Auto-generated method stub
 
 		Address addr = cs.getAddress();
-		String data = sheet.getSlotString(addr);
+		String data = Double.toString(sheet.value(cs.getAddress().toString()));
 
 		System.out.println(data);
 

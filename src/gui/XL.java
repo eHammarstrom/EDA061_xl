@@ -18,7 +18,7 @@ import model.Sheet;
 public class XL extends JFrame implements Printable {
     private static final int ROWS = 10, COLUMNS = 8;
     private XLCounter counter;
-    private StatusLabel statusLabel = new StatusLabel();
+    private StatusLabel statusLabel= new StatusLabel();
     private XLList xlList;
     private Sheet sheet;
 

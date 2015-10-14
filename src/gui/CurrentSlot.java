@@ -31,8 +31,9 @@ public class CurrentSlot extends Observable {
 
 	public void set(SlotLabel slotLabel) {
 		csLabel = slotLabel;
-		notifyObservers();
+		deleteObservers();
 		addObserver(slotLabel);
+		notifyObservers();
 	}
 
 	public void setWhite() {
