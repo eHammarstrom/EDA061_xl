@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import gui.menu.XLMenuBar;
+import model.Address;
 import model.Sheet;
 
 public class XL extends JFrame implements Printable {

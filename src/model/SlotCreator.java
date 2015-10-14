@@ -13,7 +13,7 @@ public class SlotCreator {
 			return new CommentSlot(input);
 		} else {
 			try {
-				System.out.println("Expr try to build");
+				System.out.println("Expression built by SlotCreator for Editor: " + input);
 				return new ExpressionSlot(parser.build(input));
 			} catch (Exception error) {
 				throw new XLException("SlotCreator failure");

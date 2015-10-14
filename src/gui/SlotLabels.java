@@ -28,6 +28,7 @@ public class SlotLabels extends GridPanel {
             add(new ColoredLabel(Character.toString(ch), Color.LIGHT_GRAY,
                     SwingConstants.CENTER));
         }
+
         for (int row = 1; row <= rows; row++) {
             for (char ch = 'A'; ch < 'A' + cols; ch++) {
                 
@@ -42,6 +43,7 @@ public class SlotLabels extends GridPanel {
         
         SlotLabel firstLabel = labelList.get(0);
         firstLabel.setBackground(Color.YELLOW);
+        System.out.println("Setting start CurrentSlot to: " + firstLabel.getAddress());
         cs.set(firstLabel);
 
     }

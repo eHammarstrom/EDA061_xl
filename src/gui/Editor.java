@@ -47,18 +47,16 @@ public class Editor extends JTextField implements Observer, ActionListener {
 				sl.setText(error.getMessage());
 			}
 		}
+		setText("");
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
+		System.out.println("Editor tried to update: " + cs.getAddress().toString());
 
-		Address addr = cs.getAddress();
-		String data = Double.toString(sheet.value(cs.getAddress().toString()));
+//		String data = Double.toString(sheet.value(cs.getAddress().toString()));
 
-		System.out.println(data);
-
-		setText(data);
-
+//		System.out.println(data);
 	}
 }

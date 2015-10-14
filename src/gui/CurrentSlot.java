@@ -12,7 +12,7 @@ public class CurrentSlot extends Observable {
 	private Address address;
 
 	public CurrentSlot() {
-		
+
 	}
 	
 	@Override
@@ -22,7 +22,7 @@ public class CurrentSlot extends Observable {
 	}
 
 	public String getName() {
-		return csLabel.getName();
+		return csLabel.getAddress().toString();
 	}
 	
 	public Address getAddress() {
@@ -31,7 +31,7 @@ public class CurrentSlot extends Observable {
 
 	public void set(SlotLabel slotLabel) {
 		csLabel = slotLabel;
-		deleteObservers();
+		address = slotLabel.getAddress();
 		addObserver(slotLabel);
 		notifyObservers();
 	}
