@@ -1,7 +1,9 @@
 package model;
 
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Observable;
+import java.util.Set;
 
 import gui.CurrentSlot;
 import util.XLException;
@@ -41,11 +43,13 @@ public class Sheet extends Observable implements expr.Environment {
 //				"sheet.setSlot(" + address + ", " + input + ")");
 		sheet.put(address, slot);
 //		System.out.println("sheet.setSlot: Successfully sheet.put(" + address + ", " + input + ")");
+		setChanged();
 		cs.notifyObservers();
 	}
 	
 	public void removeSlot(Address address) {
 		sheet.remove(address);
+		notifyObservers();
 	}
 	
 	public void circularCheck(Address address, Slot slot) {
@@ -104,6 +108,11 @@ public class Sheet extends Observable implements expr.Environment {
 		}
 
 		return sheet.get(address).toString();
+	}
+
+	public Set<Entry<Address, Slot>> getEntries() {
+		
+		return sheet.entrySet();
 	}
 
 }

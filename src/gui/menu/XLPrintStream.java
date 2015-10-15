@@ -5,6 +5,9 @@ import java.io.PrintStream;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import model.Address;
+import model.Slot;
+
 //TODO move to another package
 public class XLPrintStream extends PrintStream {
     public XLPrintStream(String fileName) throws FileNotFoundException {
@@ -12,11 +15,11 @@ public class XLPrintStream extends PrintStream {
     }
 
     // TODO Change Object to something appropriate
-    public void save(Set<Entry<String, Object>> set) {
-        for (Entry<String, Object> entry : set) {
-            print(entry.getKey());
+    public void save(Set<Entry<Address, Slot>> set) {
+        for (Entry<Address, Slot> entry : set) {
+            print(entry.getKey().toString());
             print('=');
-            println(entry.getValue());
+            println(entry.getValue().toString());
         }
         flush();
         close();
