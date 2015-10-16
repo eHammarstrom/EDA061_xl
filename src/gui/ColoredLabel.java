@@ -1,8 +1,7 @@
 package gui;
 
-import java.awt.Color;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
+import javax.swing.*;
+import java.awt.*;
 
 public class ColoredLabel extends JLabel {
     public ColoredLabel(String text) {

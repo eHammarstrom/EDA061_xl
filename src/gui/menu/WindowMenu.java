@@ -2,9 +2,10 @@ package gui.menu;
 
 import gui.XL;
 import gui.XLList;
+
+import javax.swing.*;
 import java.util.Observable;
 import java.util.Observer;
-import javax.swing.JMenu;
 
 public class WindowMenu extends JMenu implements Observer {
     private XLList xlList;

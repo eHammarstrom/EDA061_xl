@@ -1,8 +1,7 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
 
 public class BorderPanel extends JPanel {
     protected BorderPanel() {
