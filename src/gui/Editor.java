@@ -24,14 +24,14 @@ public class Editor extends JTextField implements Observer, ActionListener {
 		this.cs = cs;
 		addActionListener(this);
 		cs.addObserver(this);
-
+		sheet.addObserver(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 
-		sl.clear();
+		//sl.clear();
 		Address addr = cs.getAddress();
 
 		if (getText().isEmpty()) {
@@ -47,6 +47,8 @@ public class Editor extends JTextField implements Observer, ActionListener {
 				sl.setText(error.getMessage());
 			}
 		}
+		
+		sheet.notifyObservers();
 	}
 
 	@Override
@@ -54,6 +56,6 @@ public class Editor extends JTextField implements Observer, ActionListener {
 		// TODO Auto-generated method stub
 		System.out.println("Editor tried to update: " + cs.getAddress().toString());
 
-		setText(sheet.getSlotValueToString(cs.getAddress()));
+		setText(sheet.getExpressionSlotTextToString(cs.getAddress()));
 	}
 }

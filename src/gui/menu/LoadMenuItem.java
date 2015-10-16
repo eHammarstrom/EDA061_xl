@@ -16,10 +16,7 @@ class LoadMenuItem extends OpenMenuItem {
     }
 
     protected void action(String path) throws FileNotFoundException {
-    	XLBufferedReader xlbr = new XLBufferedReader(path);
-    	sheet.clearSheet();
-    	xlbr.load(sheet.getSheet());
-    	sheet.notifyObservers();
+    	sheet.load(path);
     }
 
     protected int openDialog(JFileChooser fileChooser) {

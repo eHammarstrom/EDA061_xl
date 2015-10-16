@@ -13,7 +13,7 @@ public class StatusLabel extends ColoredLabel implements Observer {
         setText("");
     }
      
-    public void clear() {
-    	setText("");
-    }
+//    public void clear() {
+//    	setText("");
+//    }
 }

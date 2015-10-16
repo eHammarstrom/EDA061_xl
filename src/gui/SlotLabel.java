@@ -10,7 +10,7 @@ import model.Address;
 import model.Sheet;
 import util.XLException;
 
-public class SlotLabel extends ColoredLabel implements MouseListener, Observer {
+public class SlotLabel extends ColoredLabel implements MouseListener {
 	private Address addr;
 	private CurrentSlot cs;
 	private StatusLabel sl;
@@ -26,10 +26,10 @@ public class SlotLabel extends ColoredLabel implements MouseListener, Observer {
         addMouseListener(this);
     }
 
-	@Override
-	public void update(Observable o, Object arg) {
-		setText(sheet.getSlotValueToString(addr));
-	}
+//	@Override
+//	public void update(Observable o, Object arg) {
+//		setText(sheet.getSlotValueToString(addr));
+//	}
 	
 	public Address getAddress() {
 		return addr;
@@ -44,9 +44,11 @@ public class SlotLabel extends ColoredLabel implements MouseListener, Observer {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		System.out.println("Observers: " + cs.countObservers());
-		sl.clear();
-		cs.setWhite();
+		// sl.clear();
+		//setBackground(Color.WHITE);
 		cs.set(this);
+		cs.notifyObservers();
+		
 		setBackground(Color.YELLOW);
 		
 		System.out.println("Mouse Pressed");

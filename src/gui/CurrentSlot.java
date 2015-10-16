@@ -8,7 +8,7 @@ import model.Column;
 import model.Row;
 
 public class CurrentSlot extends Observable {
-	private SlotLabel csLabel;
+//	private SlotLabel csLabel;
 	private Address address;
 
 	public CurrentSlot() {
@@ -21,23 +21,23 @@ public class CurrentSlot extends Observable {
 		super.notifyObservers();
 	}
 
-	public String getName() {
-		return csLabel.getAddress().toString();
-	}
+//	public String getName() {
+//		return csLabel.getAddress().toString();
+//	}
 	
 	public Address getAddress() {
 		return address;
 	}
 
 	public void set(SlotLabel slotLabel) {
-		csLabel = slotLabel;
+		// csLabel = slotLabel;
 		address = slotLabel.getAddress();
-		addObserver(slotLabel);
+	//	addObserver(slotLabel);
 		notifyObservers();
 	}
 
-	public void setWhite() {
-		csLabel.setBackground(Color.WHITE);
-	}	
+//	public void setWhite() {
+//		csLabel.setBackground(Color.WHITE);
+//	}	
 
 }

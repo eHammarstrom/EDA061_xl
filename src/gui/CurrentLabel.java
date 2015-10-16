@@ -16,7 +16,7 @@ public class CurrentLabel extends ColoredLabel implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		setText(cs.getName());
+		setText(cs.getAddress().toString());
 	}
     
     
