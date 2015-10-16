@@ -2,16 +2,14 @@ package gui.menu;
 
 import gui.StatusLabel;
 import gui.XL;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.PrintJob;
-import java.awt.Toolkit;
+import util.XLException;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
-import javax.swing.JMenuItem;
-import util.XLException;
 
 class PrintMenuItem extends JMenuItem implements ActionListener {
     private StatusLabel statusLabel;
@@ -46,8 +44,7 @@ class PrintMenuItem extends JMenuItem implements ActionListener {
         Graphics graphics = printJob.getGraphics();
         Dimension size = xl.getSize();
         Dimension pageSize = printJob.getPageDimension();
-        graphics.translate((pageSize.width - size.width) / 2,
-                (pageSize.height - size.height) / 2);
+        graphics.translate((pageSize.width - size.width) / 2, (pageSize.height - size.height) / 2);
         graphics.drawRect(-1, -1, size.width + 1, size.height + 1);
         xl.printAll(graphics);
         graphics.dispose();
