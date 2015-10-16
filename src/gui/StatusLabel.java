@@ -1,6 +1,6 @@
 package gui;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -12,8 +12,8 @@ public class StatusLabel extends ColoredLabel implements Observer {
     public void update(Observable observable, Object object) {
         setText("");
     }
-     
-    public void clear() {
-    	setText("");
-    }
+
+    //    public void clear() {
+    //    	setText("");
+    //    }
 }

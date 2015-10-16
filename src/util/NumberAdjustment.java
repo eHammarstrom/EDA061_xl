@@ -2,9 +2,12 @@ package util;
 
 /**
  * NumberAdjustment.java Created: Mon OTue 24 2005
+ *
  * @author Lennart Andersson
  * @version 0.1
  */
+
+
 /**
  * Adjustment is a class for adjusting string representations of numerical
  * values within a String.
@@ -16,12 +19,10 @@ public class NumberAdjustment extends Adjustment {
 
     /**
      * Creates an adjustment for numbers.
-     * 
-     * @param width
-     *            is the number of positions for the result. If the width is
-     *            insufficient extra positions are added.
-     * @param decimals
-     *            is the number of decimals in the result.
+     *
+     * @param width    is the number of positions for the result. If the width is
+     *                 insufficient extra positions are added.
+     * @param decimals is the number of decimals in the result.
      */
     public NumberAdjustment(int width, int decimals) {
         super(width);
@@ -30,20 +31,27 @@ public class NumberAdjustment extends Adjustment {
 
     /**
      * Creates an adjustment for numbers with an exponent field.
-     * 
-     * @param width
-     *            is the number of positions for the result. If the width is
-     *            insufficient extra positions are added.
-     * @param decimals
-     *            is the number of positions for the decimals.
-     * @param exponent
-     *            is the number of positions for the exponent including the
-     *            letter E. If the width is unsufficient extra positions are
-     *            added.
+     *
+     * @param width    is the number of positions for the result. If the width is
+     *                 insufficient extra positions are added.
+     * @param decimals is the number of positions for the decimals.
+     * @param exponent is the number of positions for the exponent including the
+     *                 letter E. If the width is unsufficient extra positions are
+     *                 added.
      */
     public NumberAdjustment(int width, int decimals, int exponent) {
         this(width, decimals);
         this.exponent = exponent;
+    }
+
+    public static void main(String[] args) {
+        Adjustment adjustment = new NumberAdjustment(10, 2, 2);
+        System.out.println("0123456789");
+        System.out.println(adjustment.right(-0.0000000000000000000000000));
+        float value = (float) (1 / 3.0);
+        System.out.println(adjustment.right(value));
+        adjustment = new Adjustment(12);
+        System.out.println(adjustment.right(value));
     }
 
     private StringBuilder fillZero(int exp) {
@@ -80,9 +88,8 @@ public class NumberAdjustment extends Adjustment {
 
     /**
      * Returns a right adjusted String.
-     * 
-     * @param number
-     *            is the value to adjust.
+     *
+     * @param number is the value to adjust.
      */
     public String right(double number) {
         StringBuilder builder = new StringBuilder();
@@ -111,21 +118,10 @@ public class NumberAdjustment extends Adjustment {
 
     /**
      * Returns a right adjusted String.
-     * 
-     * @param number
-     *            is the value to adjust.
+     *
+     * @param number is the value to adjust.
      */
     public String right(float number) {
         return right((double) number);
-    }
-
-    public static void main(String[] args) {
-        Adjustment adjustment = new NumberAdjustment(10, 2, 2);
-        System.out.println("0123456789");
-        System.out.println(adjustment.right(-0.0000000000000000000000000));
-        float value = (float) (1 / 3.0);
-        System.out.println(adjustment.right(value));
-        adjustment = new Adjustment(12);
-        System.out.println(adjustment.right(value));
     }
 }

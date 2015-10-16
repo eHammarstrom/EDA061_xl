@@ -1,19 +1,14 @@
 package gui;
 
-import static java.awt.BorderLayout.CENTER;
-import static java.awt.BorderLayout.NORTH;
-import static java.awt.BorderLayout.SOUTH;
+import gui.menu.XLMenuBar;
+import model.Sheet;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
-import gui.menu.XLMenuBar;
-import model.Sheet;
+import static java.awt.BorderLayout.*;
 
 public class XL extends JFrame implements Printable {
     private static final int ROWS = 10, COLUMNS = 8;
@@ -32,22 +27,26 @@ public class XL extends JFrame implements Printable {
         this.counter = counter;
         xlList.add(this);
         counter.increment();
-        
+
         CurrentSlot cs = new CurrentSlot();
-        sheet = new Sheet(cs);
-        
+        sheet = new Sheet();
+
         JPanel statusPanel = new StatusPanel(statusLabel, cs);
         JPanel sheetPanel = new SheetPanel(ROWS, COLUMNS, cs, statusLabel, sheet);
         Editor editor = new Editor(cs, statusLabel, sheet);
         add(NORTH, statusPanel);
         add(CENTER, editor);
         add(SOUTH, sheetPanel);
-        setJMenuBar(new XLMenuBar(this, xlList, statusLabel));
+        setJMenuBar(new XLMenuBar(this, xlList, statusLabel, sheet, cs));
         pack();
-      
+
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new XL(new XLList(), new XLCounter());
     }
 
     public int print(Graphics g, PageFormat pageFormat, int page) {
@@ -62,9 +61,5 @@ public class XL extends JFrame implements Printable {
     public void rename(String title) {
         setTitle(title);
         xlList.setChanged();
-    }
-
-    public static void main(String[] args) {
-        new XL(new XLList(), new XLCounter());
     }
 }
