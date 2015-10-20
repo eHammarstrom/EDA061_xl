@@ -17,7 +17,7 @@ public class SlotCreator {
                 System.out.println("Expression built by SlotCreator for Editor: " + input);
                 return new ExpressionSlot(parser.build(input));
             } catch (Exception e) {
-                throw new XLException("SlotCreator failure");
+                throw new XLException("Invalid input");
             }
         }
 

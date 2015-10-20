@@ -6,13 +6,11 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
-//TODO move to another package
 public class XLBufferedReader extends BufferedReader {
     public XLBufferedReader(String name) throws FileNotFoundException {
         super(new FileReader(name));
     }
 
-    // TODO Change Object to something appropriate
     public void load(Sheet sheet) {
         try {
             while (ready()) {

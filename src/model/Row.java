@@ -10,8 +10,4 @@ public class Row {
 	public String toString() {
 		return Integer.toString(row);
 	}
-
-	//	public int getValue() {
-	//		return row;
-	//	}
 }

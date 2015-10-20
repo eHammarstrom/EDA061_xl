@@ -5,15 +5,13 @@ import util.XLException;
 
 public class CircularSlot implements Slot {
 
-    // This slot handles errors
-
     public String toString() {
-        throw new XLException("CIRCULAR ERROR");
+        throw new XLException("Circular Error");
     }
 
     @Override
     public double getValue(Environment e) {
-        throw new XLException("CIRCULAR ERROR");
+        throw new XLException("Circular Error");
     }
 
 }

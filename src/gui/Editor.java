@@ -28,9 +28,6 @@ public class Editor extends JTextField implements Observer, ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-
-        //sl.clear();
         Address addr = cs.getAddress();
 
         if (getText().isEmpty()) {
@@ -46,15 +43,10 @@ public class Editor extends JTextField implements Observer, ActionListener {
                 sl.setText(error.getMessage());
             }
         }
-
-        sheet.notifyObservers();
     }
 
     @Override
     public void update(Observable o, Object arg) {
-        // TODO Auto-generated method stub
-        System.out.println("Editor tried to update: " + cs.getAddress().toString());
-
         setText(sheet.getExpressionSlotTextToString(cs.getAddress()));
     }
 }

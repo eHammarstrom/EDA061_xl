@@ -34,8 +34,7 @@ public class SlotLabels extends GridPanel implements Observer {
 
                 Address addr = new Address(new Column(ch), new Row(row));
 
-                SlotLabel label = new SlotLabel(addr, cs, sl, sheet);
-                //              sheet.addObserver(label);
+                SlotLabel label = new SlotLabel(addr, cs);
                 add(label);
                 labelList.add(label);
             }
@@ -43,7 +42,6 @@ public class SlotLabels extends GridPanel implements Observer {
 
         SlotLabel firstLabel = labelList.get(0);
         firstLabel.setBackground(Color.YELLOW);
-        System.out.println("Setting start CurrentSlot to: " + firstLabel.getAddress());
         cs.set(firstLabel);
         cs.addObserver(this);
         sheet.addObserver(this);
@@ -56,7 +54,6 @@ public class SlotLabels extends GridPanel implements Observer {
         // TODO Auto-generated method stub
 
         for (SlotLabel sl : labelList) {
-            //System.out.println("Update exe in SlotLabels");
             sl.setText(sheet.getSlotValueToString(sl.getAddress()));
             sl.setBackground(Color.WHITE);
             if (sl.getAddress().equals(cs.getAddress())) {
