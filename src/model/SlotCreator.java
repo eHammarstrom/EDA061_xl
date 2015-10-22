@@ -5,7 +5,7 @@ import util.XLException;
 
 public class SlotCreator {
 
-    public Slot createSlot(String input) {
+    public static Slot createSlot(String input) {
 
         ExprParser parser = new ExprParser();
 

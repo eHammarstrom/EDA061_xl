@@ -104,8 +104,8 @@ public class Sheet extends Observable implements expr.Environment {
 
 	public void load(String path) throws FileNotFoundException {
 		sheet.clear();
-		XLBufferedReader XL = new XLBufferedReader(path);
-		XL.load(this);
+		XLBufferedReader2 XL = new XLBufferedReader2(path);
+		XL.load(sheet);
 		notifyObservers();
 	}
 
